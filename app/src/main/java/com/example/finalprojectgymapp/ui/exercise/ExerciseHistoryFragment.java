@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,6 +36,7 @@ import com.example.finalprojectgymapp.model.Exercise;
 import com.example.finalprojectgymapp.model.ExerciseLog;
 import com.example.finalprojectgymapp.model.ExerciseLogWithWorkoutLog;
 import com.example.finalprojectgymapp.model.WorkoutLog;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -195,5 +197,21 @@ public class ExerciseHistoryFragment extends Fragment implements ExerciseLogAdap
                 return false;
             }
         }, getViewLifecycleOwner());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //Hide bottom nav bar when fragment is visible
+        BottomNavigationView bottomNavBar = getActivity().findViewById(R.id.bottom_nav_view);
+        bottomNavBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        /// Show bottom nav bar when fragment is not visible
+        BottomNavigationView bottomNavBar = getActivity().findViewById(R.id.bottom_nav_view);
+        bottomNavBar.setVisibility(View.VISIBLE);
     }
 }

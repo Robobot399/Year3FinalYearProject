@@ -79,6 +79,9 @@
         <action
             android:id="@+id/action_planListFragment_self"
             app:destination="@id/planListFragment" />
+        <action
+            android:id="@+id/action_planListFragment_to_exerciseFragment"
+            app:destination="@id/exerciseFragment" />
     </fragment>
     <!--  Argument for object passed to the next layout  -->
 

@@ -1,5 +1,7 @@
 package com.example.finalprojectgymapp.ui.workout;
 
+import static com.example.finalprojectgymapp.ui.exercise.EditExerciseLogFragment.FRAGMENT_STATE_KEY;
+import static com.example.finalprojectgymapp.ui.exercise.ExerciseFragment.PASSED_EXERCISE_KEY;
 import static com.example.finalprojectgymapp.ui.workout.MyPlansFragment.PASSED_WORKOUT_KEY;
 
 import android.graphics.Canvas;
@@ -38,6 +40,8 @@ import com.example.finalprojectgymapp.model.Exercise;
 import com.example.finalprojectgymapp.model.ExerciseItem;
 import com.example.finalprojectgymapp.model.ExerciseItemWithExercise;
 import com.example.finalprojectgymapp.model.Workout;
+import com.example.finalprojectgymapp.ui.exercise.EditExerciseLogFragment;
+import com.example.finalprojectgymapp.ui.exercise.ExerciseHistoryFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.button.MaterialButton;
 
@@ -45,7 +49,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class PlanListFragment extends Fragment {
+public class PlanListFragment extends Fragment implements ExerciseItemAdapter.OnExerciseItemClickListener{
+
+    @Override
+    public void onExercise(Exercise exercise) {
+        // navigate to the exercise info page
+        NavController navController = NavHostFragment.findNavController(PlanListFragment.this);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(PASSED_EXERCISE_KEY, exercise);
+        navController.navigate(R.id.action_planListFragment_to_exerciseFragment, bundle);
+    }
 
     private ExerciseItemViewModel exerciseItemViewModel;
     private ExerciseDbViewModel exerciseDbViewModel;
@@ -174,7 +187,7 @@ public class PlanListFragment extends Fragment {
         numExerciseTextView = binding.numExerciseTextView;
 
         recyclerView = binding.exercisesRecView;
-        exerciseItemAdapter = new ExerciseItemAdapter();
+        exerciseItemAdapter = new ExerciseItemAdapter(this);
         recyclerView.setAdapter(exerciseItemAdapter);
         if (getContext() != null) {
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -197,6 +210,7 @@ public class PlanListFragment extends Fragment {
         BottomNavigationView bottomNavBar = getActivity().findViewById(R.id.bottom_nav_view);
         bottomNavBar.clearAnimation();
         bottomNavBar.animate().translationY(+bottomNavBar.getHeight()).setInterpolator(new AccelerateInterpolator(1)); // animate disappear
+        bottomNavBar.setVisibility(View.GONE);
     }
 
     @Override
@@ -204,6 +218,7 @@ public class PlanListFragment extends Fragment {
         super.onPause();
         /// Show bottom nav bar when fragment is not visible
         BottomNavigationView bottomNavBar = getActivity().findViewById(R.id.bottom_nav_view);
+        bottomNavBar.setVisibility(View.VISIBLE);
         bottomNavBar.clearAnimation();
         bottomNavBar.animate().translationY(0).setInterpolator(new AccelerateInterpolator(1)); // animate appear
     }

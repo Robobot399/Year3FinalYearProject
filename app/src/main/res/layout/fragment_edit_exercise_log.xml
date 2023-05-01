@@ -18,6 +18,7 @@
             android:id="@+id/exercise_set_toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            android:theme="@style/ToolbarTitleWhite"
             app:menu="@menu/exercise_set_menu" />
     </com.google.android.material.appbar.AppBarLayout>
 

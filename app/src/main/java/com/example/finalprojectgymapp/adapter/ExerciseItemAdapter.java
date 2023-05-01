@@ -2,6 +2,7 @@ package com.example.finalprojectgymapp.adapter;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -10,15 +11,24 @@ import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.finalprojectgymapp.databinding.ExerciseitemItemBinding;
+import com.example.finalprojectgymapp.model.Exercise;
 import com.example.finalprojectgymapp.model.ExerciseItemWithExercise;
+import com.example.finalprojectgymapp.model.ExerciseLog;
 import com.example.finalprojectgymapp.model.ExerciseSet;
 
 import java.util.ArrayList;
 
 public class ExerciseItemAdapter extends ListAdapter<ExerciseItemWithExercise, ExerciseItemAdapter.ExerciseItemViewHolder> {
 
-    public ExerciseItemAdapter() {
+    public interface OnExerciseItemClickListener{
+        void onExercise(Exercise exercise);
+    }
+
+    private OnExerciseItemClickListener listener;
+
+    public ExerciseItemAdapter(OnExerciseItemClickListener listener) {
         super(DIFF_CALLBACK);
+        this.listener = listener;
     }
 
     private static final DiffUtil.ItemCallback<ExerciseItemWithExercise> DIFF_CALLBACK = new DiffUtil.ItemCallback<ExerciseItemWithExercise>() {
@@ -47,7 +57,17 @@ public class ExerciseItemAdapter extends ListAdapter<ExerciseItemWithExercise, E
         holder.binding.setExerciseItem(getItem(position).getExerciseItem());
         holder.binding.setExercise(getItem(position).getExercise());
         holder.binding.executePendingBindings();
-        Log.d("Adapter", "onBindViewHolder: position: " + position + ", id:" + getItem(position).getExerciseItem().getId() + " exerciseItem: " + getItem(position).getExerciseItem());
+
+        // set image click listener
+        holder.binding.exerciseImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int currentPosition = holder.getBindingAdapterPosition();
+                if(currentPosition != RecyclerView.NO_POSITION){
+                    listener.onExercise(getItem(currentPosition).getExercise());
+                }
+            }
+        });
     }
 
     public ExerciseItemWithExercise getExerciseItemWithExerciseAt(int position){

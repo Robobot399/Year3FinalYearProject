@@ -11,12 +11,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
@@ -37,6 +39,7 @@ import com.example.finalprojectgymapp.model.ExerciseSet;
 import com.example.finalprojectgymapp.model.WorkoutLog;
 import com.example.finalprojectgymapp.util.DateToStringConverter;
 import com.example.finalprojectgymapp.viewmodel.EditExerciseLogViewModel;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -153,16 +156,22 @@ public class EditExerciseLogFragment extends Fragment {
         Toolbar toolbar = binding.exerciseSetToolbar;
         ((MainActivity) requireActivity()).setSupportActionBar(toolbar);
 
-        // Display back button in toolbar
-        ((MainActivity) requireActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((MainActivity) requireActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
-        // Handle back button press
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().onBackPressed();
-            }
-        });
+        ActionBar actionBar = ((MainActivity)requireActivity()).getSupportActionBar();
+        if(actionBar != null) {
+            // set title
+            actionBar.setTitle("Edit exercise log");
+            // Display back button in toolbar
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayShowHomeEnabled(true);
+
+            // Handle back button press
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getActivity().onBackPressed();
+                }
+            });
+        }
     }
 
     private void setToolbarMenu() {
@@ -226,5 +235,21 @@ public class EditExerciseLogFragment extends Fragment {
         if (inputMethodManager != null) {
             inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //Hide bottom nav bar when fragment is visible
+        BottomNavigationView bottomNavBar = getActivity().findViewById(R.id.bottom_nav_view);
+        bottomNavBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        /// Show bottom nav bar when fragment is not visible
+        BottomNavigationView bottomNavBar = getActivity().findViewById(R.id.bottom_nav_view);
+        bottomNavBar.setVisibility(View.VISIBLE);
     }
 }

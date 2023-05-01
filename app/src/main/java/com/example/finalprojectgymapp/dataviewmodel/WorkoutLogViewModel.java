@@ -39,8 +39,6 @@ public class WorkoutLogViewModel extends AndroidViewModel {
         return repository.getAllWorkoutLogs();
     }
 
-
-
     public LiveData<WorkoutLog> getWorkoutLogById(int workoutLogId) {
         return repository.getWorkoutLogById(workoutLogId);
     }

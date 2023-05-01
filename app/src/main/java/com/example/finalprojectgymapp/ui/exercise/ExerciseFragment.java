@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -26,6 +27,7 @@ import com.example.finalprojectgymapp.model.Exercise;
 import com.example.finalprojectgymapp.model.ExerciseItem;
 import com.example.finalprojectgymapp.model.Workout;
 import com.example.finalprojectgymapp.util.Utils;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class ExerciseFragment extends Fragment {
     private ExerciseDbViewModel exerciseDbViewModel;
@@ -86,7 +88,9 @@ public class ExerciseFragment extends Fragment {
         addExerciseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addExerciseToPlan();
+                if(selectedWorkout != null){
+                    addExerciseToPlan();
+                }
             }
         });
 
@@ -111,5 +115,21 @@ public class ExerciseFragment extends Fragment {
         navController.popBackStack(R.id.searchExerciseFragment, true);
 
         navController.popBackStack();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        //Hide bottom nav bar when fragment is visible
+        BottomNavigationView bottomNavBar = getActivity().findViewById(R.id.bottom_nav_view);
+        bottomNavBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        /// Show bottom nav bar when fragment is not visible
+        BottomNavigationView bottomNavBar = getActivity().findViewById(R.id.bottom_nav_view);
+        bottomNavBar.setVisibility(View.VISIBLE);
     }
 }
