@@ -1,6 +1,7 @@
 package com.example.finalprojectgymapp.ui.history;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -114,11 +115,11 @@ public class HistoryFragment extends Fragment implements CalendarAdapter.OnItemL
         ArrayList<String> daysInMonthArray = new ArrayList<>();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
-        int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH); // returns 31
 
         // Retrieve integer of days between 0 and 7
-        calendar.set(Calendar.DAY_OF_MONTH, 1);
-        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1;
+        calendar.set(Calendar.DAY_OF_MONTH, 1); // set day of month to 1, e.g. March 1st
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK) - 1; // retrieve how many days it is from the starting point of Sunday
 
         // To match with workout log date
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
@@ -126,6 +127,7 @@ public class HistoryFragment extends Fragment implements CalendarAdapter.OnItemL
         for (int i = 1; i <= 42; i++) {
             if (i <= dayOfWeek || i > daysInMonth + dayOfWeek) {
                 // Create empty cell if before the first day of the month, or after the 29th/30th/31st of the month
+                // + dayOfWeek to add offset from initial starting point of 1st day in the month
                 daysInMonthArray.add("");
             } else {
                 // Else assign day into the month
