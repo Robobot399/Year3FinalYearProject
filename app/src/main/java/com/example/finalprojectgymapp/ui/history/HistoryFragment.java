@@ -86,7 +86,6 @@ public class HistoryFragment extends Fragment implements CalendarAdapter.OnItemL
         return root;
     }
 
-
     private void initViews() {
         monthYearTextView = binding.monthYearTextView;
         calendarRecyclerView = binding.calendarRecyclerView;
