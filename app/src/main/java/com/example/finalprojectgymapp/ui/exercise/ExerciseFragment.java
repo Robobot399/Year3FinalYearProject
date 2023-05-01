@@ -109,10 +109,7 @@ public class ExerciseFragment extends Fragment {
         NavController navController = NavHostFragment.findNavController(ExerciseFragment.this);
         navController.popBackStack(R.id.exerciseFragment, true);
         navController.popBackStack(R.id.searchExerciseFragment, true);
-        navController.popBackStack(R.id.planListFragment, false);
 
-        Bundle bundle = new Bundle();
-        bundle.putParcelable(PASSED_WORKOUT_KEY, selectedWorkout);
-        navController.navigate(R.id.action_planListFragment_self, bundle);
+        navController.popBackStack();
     }
 }

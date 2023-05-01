@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.Transformations;
 
+import com.example.finalprojectgymapp.model.ExerciseLogWithWorkoutLog;
 import com.example.finalprojectgymapp.util.DateToStringConverter;
 import com.example.finalprojectgymapp.model.ExerciseLog;
 import com.example.finalprojectgymapp.model.WorkoutLog;

@@ -13,6 +13,7 @@ import com.example.finalprojectgymapp.databinding.ExerciseLogItemBinding;
 import com.example.finalprojectgymapp.dataviewmodel.ExerciseSetViewModel;
 import com.example.finalprojectgymapp.model.Exercise;
 import com.example.finalprojectgymapp.model.ExerciseLog;
+import com.example.finalprojectgymapp.model.ExerciseLogWithWorkoutLog;
 import com.example.finalprojectgymapp.model.ExerciseSet;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class ExerciseLogAdapter extends RecyclerView.Adapter<ExerciseLogAdapter.
 
     private OnExerciseLogClickListener listener;
 
-    private ArrayList<ExerciseLog> exerciseLogs = new ArrayList<>();
+    private ArrayList<ExerciseLogWithWorkoutLog> exerciseLogWithWorkoutLogs = new ArrayList<>();
     private Exercise exercise;
 
     private ExerciseSetViewModel exerciseSetViewModel;
@@ -49,10 +50,16 @@ public class ExerciseLogAdapter extends RecyclerView.Adapter<ExerciseLogAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ExerciseLogViewHolder holder, int position) {
-        ExerciseLog currentExerciseLog = exerciseLogs.get(position);
+        ExerciseLogWithWorkoutLog currentExerciseLogWithWorkoutLog = exerciseLogWithWorkoutLogs.get(position);
+        ExerciseLog currentExerciseLog = currentExerciseLogWithWorkoutLog.getExerciseLog();
+        String date = currentExerciseLogWithWorkoutLog.getWorkoutLog().getWorkoutDate();
+
         holder.binding.setExercise(exercise);
         holder.binding.setExerciseLog(currentExerciseLog);
+        holder.binding.setDate(date);
+
         holder.binding.executePendingBindings();
+
 
         // Setup inner adapter
         holder.setExerciseSets(exerciseSetViewModel.getListExerciseSetsByExerciseLogId(currentExerciseLog.getId()));
@@ -63,7 +70,7 @@ public class ExerciseLogAdapter extends RecyclerView.Adapter<ExerciseLogAdapter.
             public void onClick(View v) {
                 int currentPosition = holder.getBindingAdapterPosition();
                 if (currentPosition != RecyclerView.NO_POSITION) {
-                    listener.onExerciseLog(exerciseLogs.get(currentPosition));
+                    listener.onExerciseLog(exerciseLogWithWorkoutLogs.get(currentPosition).getExerciseLog());
                 }
             }
         });
@@ -71,11 +78,11 @@ public class ExerciseLogAdapter extends RecyclerView.Adapter<ExerciseLogAdapter.
 
     @Override
     public int getItemCount() {
-        return exerciseLogs.size();
+        return exerciseLogWithWorkoutLogs.size();
     }
 
-    public void setExerciseLogs(ArrayList<ExerciseLog> exerciseLogs) {
-        this.exerciseLogs = exerciseLogs;
+    public void setExerciseLogWithWorkoutLogs(ArrayList<ExerciseLogWithWorkoutLog> exerciseLogWithWorkoutLogs) {
+        this.exerciseLogWithWorkoutLogs = exerciseLogWithWorkoutLogs;
         notifyDataSetChanged();
     }
 

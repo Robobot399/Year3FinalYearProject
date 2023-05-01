@@ -42,7 +42,7 @@
             app:srcCompat="@drawable/ic_drag_icon" />
 
         <TextView
-            android:id="@+id/exerciseNameTextView"
+            android:id="@+id/logDateTextView"
             style="@style/ExerciseTextBodyStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -63,8 +63,8 @@
             android:layout_marginTop="4dp"
             android:text="@{Integer.toString(exerciseItem.setAmount)}"
             android:textSize="10sp"
-            app:layout_constraintStart_toStartOf="@+id/exerciseNameTextView"
-            app:layout_constraintTop_toBottomOf="@+id/exerciseNameTextView"
+            app:layout_constraintStart_toStartOf="@+id/logDateTextView"
+            app:layout_constraintTop_toBottomOf="@+id/logDateTextView"
             tools:text="3" />
 
         <TextView

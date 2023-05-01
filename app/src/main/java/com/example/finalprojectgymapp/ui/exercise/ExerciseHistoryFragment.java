@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
@@ -32,6 +33,8 @@ import com.example.finalprojectgymapp.dataviewmodel.ExerciseSetViewModel;
 import com.example.finalprojectgymapp.dataviewmodel.WorkoutLogViewModel;
 import com.example.finalprojectgymapp.model.Exercise;
 import com.example.finalprojectgymapp.model.ExerciseLog;
+import com.example.finalprojectgymapp.model.ExerciseLogWithWorkoutLog;
+import com.example.finalprojectgymapp.model.WorkoutLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +64,9 @@ public class ExerciseHistoryFragment extends Fragment implements ExerciseLogAdap
 
     private ExerciseLogAdapter adapter;
 
+    private List<WorkoutLog> workoutLogs;
+    private List<ExerciseLog> exerciseLogs;
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -86,16 +92,40 @@ public class ExerciseHistoryFragment extends Fragment implements ExerciseLogAdap
             exercise = bundle.getParcelable(PASSED_EXERCISE_KEY);
         }
 
+        workoutLogViewModel.getAllWorkoutLogs().observe(getViewLifecycleOwner(), new Observer<List<WorkoutLog>>() {
+            @Override
+            public void onChanged(List<WorkoutLog> passedWorkoutLogs) {
+                workoutLogs = passedWorkoutLogs;
+                combineExerciseLogsWithWorkoutLogs();
+            }
+        });
+
         exerciseLogViewModel.getExerciseLogsByExerciseId(exercise.getId()).observe(getViewLifecycleOwner(), new Observer<List<ExerciseLog>>() {
             @Override
-            public void onChanged(List<ExerciseLog> exerciseLogs) {
-                adapter.setExerciseLogs((ArrayList<ExerciseLog>) exerciseLogs);
+            public void onChanged(List<ExerciseLog> passedExerciseLogs) {
+                exerciseLogs = passedExerciseLogs;
+                combineExerciseLogsWithWorkoutLogs();
             }
         });
 
         // TODO: implement remove ExerciseLog button
 
         return root;
+    }
+
+    private void combineExerciseLogsWithWorkoutLogs() {
+        if (exerciseLogs == null || workoutLogs == null) {return;}
+
+        List<ExerciseLogWithWorkoutLog> exerciseLogWithWorkoutLogs = new ArrayList<>();
+        for (ExerciseLog exerciseLog : exerciseLogs) {
+            for (WorkoutLog workoutLog : workoutLogs) {
+                if (exerciseLog.getWorkoutLogId() == workoutLog.getId()) {
+                    exerciseLogWithWorkoutLogs.add(new ExerciseLogWithWorkoutLog(exerciseLog, workoutLog));
+                    break;
+                }
+            }
+        }
+        adapter.setExerciseLogWithWorkoutLogs((ArrayList<ExerciseLogWithWorkoutLog>) exerciseLogWithWorkoutLogs);
     }
 
     private void initViews() {
@@ -110,16 +140,23 @@ public class ExerciseHistoryFragment extends Fragment implements ExerciseLogAdap
         Toolbar toolbar = binding.exerciseLogToolbar;
         ((MainActivity) requireActivity()).setSupportActionBar(toolbar);
 
-        // Enable back button in toolbar
-        ((MainActivity) requireActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((MainActivity) requireActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
-        // Handle back button press
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().onBackPressed();
-            }
-        });
+        ActionBar actionBar = ((MainActivity)requireActivity()).getSupportActionBar();
+        if(actionBar != null){
+            // set title
+            actionBar.setTitle(exercise.getName() + " Log");
+
+            // Enable back button in toolbar
+            ((MainActivity) requireActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            ((MainActivity) requireActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+            // Handle back button press
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getActivity().onBackPressed();
+                }
+            });
+        }
+
     }
 
     private void setToolbarMenu() {

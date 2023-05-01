@@ -39,7 +39,7 @@
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
-                android:id="@+id/exerciseNameTextView"
+                android:id="@+id/logDateTextView"
                 style="@style/ExerciseTextBodyStyle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

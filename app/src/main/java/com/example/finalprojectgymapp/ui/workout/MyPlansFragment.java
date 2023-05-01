@@ -1,5 +1,7 @@
 package com.example.finalprojectgymapp.ui.workout;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -40,6 +42,28 @@ public class MyPlansFragment extends Fragment implements WorkoutAdapter.OnWorkou
         bundle.putParcelable(PASSED_WORKOUT_KEY, workout);
 
         navController.navigate(R.id.action_navigation_workout_item_to_planListFragment, bundle);
+    }
+
+    @Override
+    public void onDeleteIconClick(Workout workout) {
+        // Remove workout
+        AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+        alert.setTitle("Delete Workout");
+        alert.setMessage("Confirm delete workout plan?");
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                // Dismiss dialog
+            }
+        });
+        alert.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                workoutsViewModel.delete(workout);
+                adapter.notifyDataSetChanged();
+            }
+        });
+        alert.create().show();
     }
 
     private static final String TAG = "MyPlansFragment";

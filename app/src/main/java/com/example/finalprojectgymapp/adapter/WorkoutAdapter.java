@@ -11,11 +11,13 @@ import com.example.finalprojectgymapp.databinding.WorkoutItemBinding;
 import com.example.finalprojectgymapp.model.Workout;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutViewHolder> {
 
     public interface OnWorkoutItemClickListener {
         void onWorkoutItemClick(Workout workout);
+        void onDeleteIconClick(Workout workout);
     }
 
     private ArrayList<Workout> workouts = new ArrayList<>();
@@ -46,6 +48,19 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutV
                 if (currentPosition != RecyclerView.NO_POSITION) {
                     if (listener != null) {
                         listener.onWorkoutItemClick(workouts.get(currentPosition));
+                    }
+                }
+            }
+        });
+
+        // Delete workout
+        holder.binding.deleteImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int currentPosition = holder.getBindingAdapterPosition();
+                if (currentPosition != RecyclerView.NO_POSITION){
+                    if(listener!=null){
+                        listener.onDeleteIconClick(workouts.get(currentPosition));
                     }
                 }
             }

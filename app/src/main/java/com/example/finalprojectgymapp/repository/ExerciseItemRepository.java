@@ -41,14 +41,14 @@ public class ExerciseItemRepository {
     public void delete(ExerciseItem exerciseItem) {
         executor.execute(() -> {
             exerciseItemDao.delete(exerciseItem);
-            workoutLogDao.deleteWorkoutLogsWithNoExerciseLogs();
+            //workoutLogDao.deleteWorkoutLogsWithNoExerciseLogs(); // no longer required
         });
     }
 
     public void deleteAllExerciseItems() {
         executor.execute(() -> {
             exerciseItemDao.deleteAllExerciseItems();
-            workoutLogDao.deleteAllWorkoutLogs();
+            //workoutLogDao.deleteAllWorkoutLogs(); // no longer required
         });
     }
 

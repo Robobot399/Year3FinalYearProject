@@ -44,7 +44,7 @@
                     android:textColor="@color/primary_interact_colour" />
 
                 <TextView
-                    android:id="@+id/exerciseNameTextView"
+                    android:id="@+id/logDateTextView"
                     style="@style/ExerciseTextBodyStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
                     style="@style/ExerciseTextBodyStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/exerciseNameTextView"
+                    android:layout_below="@id/logDateTextView"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginEnd="10dp"

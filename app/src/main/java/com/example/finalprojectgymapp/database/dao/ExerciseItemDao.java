@@ -23,6 +23,9 @@ public interface ExerciseItemDao {
     @Delete
     void delete(ExerciseItem exerciseItem);
 
+    @Query("DELETE FROM exercise_item where id = :exerciseItemId")
+    int deleteById(int exerciseItemId);
+
     @Query("DELETE FROM exercise_item")
     void deleteAllExerciseItems();
 
@@ -30,7 +33,7 @@ public interface ExerciseItemDao {
     LiveData<List<ExerciseItem>> getAllExerciseItems();
 
     // Find list of exercise items from selected Workout
-    @Query("SELECT * FROM exercise_item " +
+    @Query("SELECT exercise_item.id, exercise_item.workout_id, exercise_item.exercise_id, exercise_item.setAmount, exercise_item.repAmount FROM exercise_item " +
             "INNER JOIN workout ON workout.id = workout_id " +
             "WHERE exercise_item.workout_id =:workoutId")
     LiveData<List<ExerciseItem>> getExerciseItemsByWorkoutId(int workoutId);

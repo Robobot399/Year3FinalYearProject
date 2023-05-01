@@ -51,6 +51,10 @@
         <item name="tabRippleColor">@color/primary_interact_colour</item>
         <item name="android:background">@color/window_background</item>
     </style>
+    <!--  Style toolbar  -->
+    <style name="ToolbarTitleWhite" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:textColorPrimary">@color/white</item>
+    </style>
 
     <!--  Text Title  -->
     <style name="ExerciseTextTitleStyle">

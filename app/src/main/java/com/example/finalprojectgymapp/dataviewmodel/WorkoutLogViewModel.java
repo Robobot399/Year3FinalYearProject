@@ -7,9 +7,12 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Transformations;
 
+import com.example.finalprojectgymapp.model.Workout;
 import com.example.finalprojectgymapp.util.DateToStringConverter;
 import com.example.finalprojectgymapp.model.WorkoutLog;
 import com.example.finalprojectgymapp.repository.WorkoutLogRepository;
+
+import java.util.List;
 
 public class WorkoutLogViewModel extends AndroidViewModel {
 
@@ -31,6 +34,11 @@ public class WorkoutLogViewModel extends AndroidViewModel {
     public void delete(WorkoutLog workoutLog) {
         repository.delete(workoutLog);
     }
+
+    public LiveData<List<WorkoutLog>> getAllWorkoutLogs() {
+        return repository.getAllWorkoutLogs();
+    }
+
 
 
     public LiveData<WorkoutLog> getWorkoutLogById(int workoutLogId) {
