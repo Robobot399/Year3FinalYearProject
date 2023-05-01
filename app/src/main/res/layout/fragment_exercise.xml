@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="exercise"
+            type="com.example.finalprojectgymapp.model.Exercise" />
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedPageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="60dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/exerciseImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    app:loadGif="@{exercise.gifUrl}"
+                    tools:src="@drawable/ic_launcher_background" />
+
+                <TextView
+                    android:id="@+id/historyButtonTextView"
+                    style="@style/ExerciseTextBodyStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="25dp"
+                    android:text="HISTORY"
+                    android:textColor="@color/primary_interact_colour" />
+
+                <TextView
+                    android:id="@+id/exerciseNameTextView"
+                    style="@style/ExerciseTextBodyStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/exerciseImageView"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="@{exercise.name}"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline1"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    tools:text="Exercise name" />
+
+                <TextView
+                    android:id="@+id/aboutTextView"
+                    style="@style/ExerciseTextBodyStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/exerciseNameTextView"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="ABOUT"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline2"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/equipmentTitleTextView"
+                    style="@style/ExerciseTextBodyStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/aboutTextView"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:text="Equipment"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/equipmentTextView"
+                    style="@style/ExerciseTextBodyStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/equipmentTitleTextView"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="@{exercise.equipment}"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+                    android:textSize="12sp"
+                    tools:text="Equipment name" />
+
+                <TextView
+                    android:id="@+id/targetMuscleTitleTextView"
+                    style="@style/ExerciseTextBodyStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/equipmentTextView"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+
+                    android:text="Target Muscle"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/targetMuscleTextView"
+                    style="@style/ExerciseTextBodyStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/targetMuscleTitleTextView"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="@{exercise.target}"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+                    android:textSize="12sp"
+                    tools:text="Muscle name" />
+            </RelativeLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <RelativeLayout
+            android:id="@+id/relButtonContainer"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true">
+
+            <Button
+                android:id="@+id/addExerciseButton"
+                style="@style/ExerciseAddButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="100dp"
+                android:text="ADD"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+</layout>

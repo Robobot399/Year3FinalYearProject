@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Work Your Workout</string>
+
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <string name="title_workout">Workout</string>
+    <string name="title_exercise">Exercise</string>
+    <string name="title_history">History</string>
+    <string name="title_profile">Profile</string>
+
+    <string name="plan_details_title">Workout details</string>
+    <string name="add_circle_button_description">Add Exercise</string>
+
+    <!--  Search bar  -->
+    <string name="search">Search</string>
+    <string name="filter">Filter</string>
+    <string name="add_log">Add Exercise Log</string>
+
+    <string name="edit_workout">EDIT</string>
+
+    <string name="save_log">Save Changes</string>
+    <string name="choose_date">Pick a Date</string>
+
+    <string name="set_number">Set %1$d:</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="blank_fragment">Blank Fragment</string>
+</resources>

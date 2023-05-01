@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="exerciseItem"
+            type="com.example.finalprojectgymapp.model.ExerciseItem" />
+
+        <variable
+            name="exercise"
+            type="com.example.finalprojectgymapp.model.Exercise" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/exercise_log_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/exerciseImageView"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/dragIconImageView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:loadImage="@{exercise.gifUrl}"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/dragIconImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_drag_icon" />
+
+        <TextView
+            android:id="@+id/exerciseNameTextView"
+            style="@style/ExerciseTextBodyStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@{exercise.name}"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/exerciseImageView"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Exercise title" />
+
+        <TextView
+            android:id="@+id/setsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@{Integer.toString(exerciseItem.setAmount)}"
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="@+id/exerciseNameTextView"
+            app:layout_constraintTop_toBottomOf="@+id/exerciseNameTextView"
+            tools:text="3" />
+
+        <TextView
+            android:id="@+id/repsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="@{Integer.toString(exerciseItem.repAmount)}"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/crossTextView"
+            app:layout_constraintStart_toEndOf="@+id/crossTextView"
+            app:layout_constraintTop_toTopOf="@+id/crossTextView"
+            tools:text="15" />
+
+        <TextView
+            android:id="@+id/crossTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="x"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/setsTextView"
+            app:layout_constraintStart_toEndOf="@+id/setsTextView"
+            app:layout_constraintTop_toTopOf="@+id/setsTextView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

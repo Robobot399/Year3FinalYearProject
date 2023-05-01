@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="exerciseSet"
+            type="com.example.finalprojectgymapp.model.ExerciseSet" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/set_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="1dp">
+
+        <TextView
+            android:id="@+id/setNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Set :"
+            tools:text="Set 1:" />
+
+        <TextView
+            android:id="@+id/weightTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{Double.toString(exerciseSet.weight)}"
+            tools:text="10" />
+
+        <TextView
+            android:id="@+id/unitTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" kg x " />
+
+        <TextView
+            android:id="@+id/repTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{Integer.toString(exerciseSet.reps)}"
+            tools:text="30" />
+    </LinearLayout>
+</layout>

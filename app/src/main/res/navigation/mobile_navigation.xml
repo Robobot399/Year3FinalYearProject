@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_workout_item">
+
+    <action android:id="@+id/action_global_performExerciseFragment"
+        app:destination="@id/performExerciseFragment"/>
+
+    <action android:id="@+id/action_performExerciseFragment_to_endWorkoutFragment"
+        app:destination="@id/endWorkoutFragment"/>
+
+    <fragment
+        android:id="@+id/navigation_workout_item"
+        android:name="com.example.finalprojectgymapp.ui.workout.WorkoutFragments"
+        android:label="@string/title_workout"
+        tools:layout="@layout/fragment_workouts" >
+        <action
+            android:id="@+id/action_navigation_workout_item_to_planListFragment"
+            app:destination="@id/planListFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_exercise_item"
+        android:name="com.example.finalprojectgymapp.ui.exercise.ExerciseCatalogueFragment"
+        android:label="@string/title_exercise"
+        tools:layout="@layout/fragment_exercise_catalogue" />
+
+    <fragment
+        android:id="@+id/navigation_history_item"
+        android:name="com.example.finalprojectgymapp.ui.history.HistoryFragment"
+        android:label="@string/title_history"
+        tools:layout="@layout/fragment_history" />
+
+    <fragment
+        android:id="@+id/navigation_profile_item"
+        android:name="com.example.finalprojectgymapp.ui.profile.ProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <!--  Fragments outside the nav bar  -->
+    <fragment
+        android:id="@+id/recommendPlanFragment"
+        android:name="com.example.finalprojectgymapp.ui.workout.RecommendPlanFragment"
+        android:label="Recommend Plan"
+        tools:layout="@layout/fragment_recommend_plan">
+        <action
+            android:id="@+id/action_recommendPlanFragment_to_performExerciseFragment"
+            app:destination="@id/performExerciseFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/myPlansFragment"
+        android:name="com.example.finalprojectgymapp.ui.workout.MyPlansFragment"
+        android:label="My Plans"
+        tools:layout="@layout/fragment_my_plans"/>
+
+    <fragment
+        android:id="@+id/planListFragment"
+        android:name="com.example.finalprojectgymapp.ui.workout.PlanListFragment"
+        android:label="Workout Details"
+        tools:layout="@layout/fragment_plan_list">
+        <argument
+            android:name="passedWorkout"
+            app:argType="com.example.finalprojectgymapp.model.Workout"
+            android:defaultValue="@null"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_planListFragment_to_performExerciseFragment"
+            app:destination="@id/performExerciseFragment" />
+        <action
+            android:id="@+id/action_planListFragment_to_searchExerciseFragment"
+            app:destination="@id/searchExerciseFragment" />
+        <action
+            android:id="@+id/action_planListFragment_self"
+            app:destination="@id/planListFragment" />
+    </fragment>
+    <!--  Argument for object passed to the next layout  -->
+
+    <fragment
+        android:id="@+id/performExerciseFragment"
+        android:name="com.example.finalprojectgymapp.ui.workout.PerformExerciseFragment"
+        android:label="Perform Exercise"
+        tools:layout="@layout/fragment_perform_exercise">
+        <action
+            android:id="@+id/action_performExerciseFragment_to_endWorkoutFragment"
+            app:destination="@id/endWorkoutFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/endWorkoutFragment"
+        android:name="com.example.finalprojectgymapp.ui.workout.EndWorkoutFragment"
+        android:label="Workout Complete"
+        tools:layout="@layout/fragment_end_workout">
+        <action
+            android:id="@+id/action_endWorkoutFragment_to_navigation_history_item"
+            app:destination="@id/navigation_history_item" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchExerciseFragment"
+        android:name="com.example.finalprojectgymapp.ui.exercise.SearchExerciseFragment"
+        android:label="Search Exercises"
+        tools:layout="@layout/fragment_search_exercise">
+        <action
+            android:id="@+id/action_searchExerciseFragment_to_exerciseFragment"
+            app:destination="@id/exerciseFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/exerciseFragment"
+        android:name="com.example.finalprojectgymapp.ui.exercise.ExerciseFragment"
+        android:label="Exercise detail"
+        tools:layout="@layout/fragment_exercise">
+        <action
+            android:id="@+id/action_exerciseFragment_to_planListFragment"
+            app:destination="@id/planListFragment" />
+        <action
+            android:id="@+id/action_exerciseFragment_to_exerciseHistoryFragment"
+            app:destination="@id/exerciseHistoryFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/exerciseHistoryFragment"
+        android:name="com.example.finalprojectgymapp.ui.exercise.ExerciseHistoryFragment"
+        android:label="Exercise History"
+        tools:layout="@layout/fragment_exercise_history">
+        <action
+            android:id="@+id/action_exerciseHistoryFragment_to_editExerciseLogFragment"
+            app:destination="@id/editExerciseLogFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editExerciseLogFragment"
+        android:name="com.example.finalprojectgymapp.ui.exercise.EditExerciseLogFragment"
+        android:label="Edit Exercise Log"
+        tools:layout="@layout/fragment_edit_exercise_log">
+    </fragment>
+
+</navigation>

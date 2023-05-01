@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="exerciseSet"
+            type="com.example.finalprojectgymapp.model.ExerciseSet" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/set_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginVertical="2dp">
+
+        <TextView
+            android:id="@+id/setNumberTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Set"
+            android:textColor="@color/secondary_interact_colour"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Set 1:" />
+
+        <EditText
+            android:id="@+id/weightEditText"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/white"
+            android:focusableInTouchMode="true"
+            android:gravity="center"
+            android:imeOptions="actionNext"
+            android:inputType="numberDecimal|numberSigned"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/setNumberTextView"
+            app:layout_constraintEnd_toStartOf="@+id/repEditText"
+            app:layout_constraintTop_toTopOf="@+id/setNumberTextView"
+            tools:text="100" />
+
+        <EditText
+            android:id="@+id/repEditText"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:focusableInTouchMode="true"
+            android:gravity="center"
+            android:imeOptions="actionNext"
+            android:inputType="numberSigned"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/weightEditText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/weightEditText"
+            tools:text="20" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

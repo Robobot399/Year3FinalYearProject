@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/date_picker_action"
+        android:icon="@drawable/ic_calendar"
+        android:iconTint="@color/white"
+        android:iconTintMode="multiply"
+        android:title="@string/choose_date"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/save_log_action"
+        android:icon="@drawable/ic_save"
+        android:title="@string/save_log"
+        app:showAsAction="ifRoom" />
+</menu>
